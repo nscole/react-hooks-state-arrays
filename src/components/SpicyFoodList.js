@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { spicyFoods, getNewSpicyFood } from "../data";
 
-function SpicyFoodList() {
+// ORIGINAL FUNCTION
+/*function SpicyFoodList() {
   const [foods, setFoods] = useState(spicyFoods);
 
   function handleAddFood() {
@@ -12,9 +13,35 @@ function SpicyFoodList() {
   return (
     <div>
       <button onClick={handleAddFood}>Add New Food</button>
-      <ul>{/* list of spicy foods */}</ul>
+      <ul>{}</ul>
     </div>
   );
-}
+}*/
+
+// Adding Elements to an Array
+function SpicyFoodList() {
+const [foods, setFoods] = useState(spicyFoods);
+const foodList = foods.map((food) => (
+  <li key={food.id}>
+    {food.name} | Heat: {food.heatLevel} | Cuisine: {food.cuisine}
+  </li>
+));
+
+function handleAddFood() {
+  const newFood = getNewSpicyFood();
+  const newFoodArray = [...foods, newFood];
+  setFoods(newFoodArray);
+} 
+
+return (
+  <div>
+    <button onClick={handleAddFood}>Add New Food</button>
+    <ul>{foodList}</ul>
+  </div>
+); };
+
+
+
+
 
 export default SpicyFoodList;
